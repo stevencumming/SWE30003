@@ -49,6 +49,7 @@ namespace CozyKangaroo
         public void lineBorder()
         {
             Console.ForegroundColor = BORDER_COLOUR;
+            Console.Write("");
             for (int i = 0; i < APP_WIDTH; i++)
             {
                 Console.Write("*");

@@ -16,6 +16,9 @@ namespace CozyKangaroo
             console.printJustifyLeft("");
 
             console.lineBorder();
+
+          
+
         }
 
         
@@ -23,7 +26,19 @@ namespace CozyKangaroo
 
         static void Login()
         {
+            Console.WriteLine("Enter user name");
 
+            string luser = Console.ReadLine();
+
+            switch (luser)
+            {
+                "aaa:
+                    Console.WriteLine();
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 }
