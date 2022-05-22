@@ -6,7 +6,22 @@ namespace CozyKangaroo
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // on start, show logon?
+            ConsoleUI console = new ConsoleUI();
+
+            console.clearConsole();
+            console.heading("The Cozy Kangaroo", ConsoleColor.Red);
+
+
+
+        }
+
+        
+
+
+        static void Login()
+        {
+
         }
     }
 }

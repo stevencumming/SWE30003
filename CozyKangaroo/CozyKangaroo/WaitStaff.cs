@@ -6,5 +6,6 @@ namespace CozyKangaroo
 {
     class WaitStaff
     {
+
     }
 }
