@@ -1,0 +1,14 @@
+C:\Users\steve\OneDrive - Swinburne University\SWE30003 Software Architectures and Design\Assignment 3\SWE30003\CozyKangaroo\CozyKangaroo\bin\Debug\netcoreapp3.1\CozyKangaroo.exe
+C:\Users\steve\OneDrive - Swinburne University\SWE30003 Software Architectures and Design\Assignment 3\SWE30003\CozyKangaroo\CozyKangaroo\bin\Debug\netcoreapp3.1\CozyKangaroo.deps.json
+C:\Users\steve\OneDrive - Swinburne University\SWE30003 Software Architectures and Design\Assignment 3\SWE30003\CozyKangaroo\CozyKangaroo\bin\Debug\netcoreapp3.1\CozyKangaroo.runtimeconfig.json
+C:\Users\steve\OneDrive - Swinburne University\SWE30003 Software Architectures and Design\Assignment 3\SWE30003\CozyKangaroo\CozyKangaroo\bin\Debug\netcoreapp3.1\CozyKangaroo.runtimeconfig.dev.json
+C:\Users\steve\OneDrive - Swinburne University\SWE30003 Software Architectures and Design\Assignment 3\SWE30003\CozyKangaroo\CozyKangaroo\bin\Debug\netcoreapp3.1\CozyKangaroo.dll
+C:\Users\steve\OneDrive - Swinburne University\SWE30003 Software Architectures and Design\Assignment 3\SWE30003\CozyKangaroo\CozyKangaroo\bin\Debug\netcoreapp3.1\CozyKangaroo.pdb
+C:\Users\steve\OneDrive - Swinburne University\SWE30003 Software Architectures and Design\Assignment 3\SWE30003\CozyKangaroo\CozyKangaroo\obj\Debug\netcoreapp3.1\CozyKangaroo.csproj.AssemblyReference.cache
+C:\Users\steve\OneDrive - Swinburne University\SWE30003 Software Architectures and Design\Assignment 3\SWE30003\CozyKangaroo\CozyKangaroo\obj\Debug\netcoreapp3.1\CozyKangaroo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\steve\OneDrive - Swinburne University\SWE30003 Software Architectures and Design\Assignment 3\SWE30003\CozyKangaroo\CozyKangaroo\obj\Debug\netcoreapp3.1\CozyKangaroo.AssemblyInfoInputs.cache
+C:\Users\steve\OneDrive - Swinburne University\SWE30003 Software Architectures and Design\Assignment 3\SWE30003\CozyKangaroo\CozyKangaroo\obj\Debug\netcoreapp3.1\CozyKangaroo.AssemblyInfo.cs
+C:\Users\steve\OneDrive - Swinburne University\SWE30003 Software Architectures and Design\Assignment 3\SWE30003\CozyKangaroo\CozyKangaroo\obj\Debug\netcoreapp3.1\CozyKangaroo.csproj.CoreCompileInputs.cache
+C:\Users\steve\OneDrive - Swinburne University\SWE30003 Software Architectures and Design\Assignment 3\SWE30003\CozyKangaroo\CozyKangaroo\obj\Debug\netcoreapp3.1\CozyKangaroo.dll
+C:\Users\steve\OneDrive - Swinburne University\SWE30003 Software Architectures and Design\Assignment 3\SWE30003\CozyKangaroo\CozyKangaroo\obj\Debug\netcoreapp3.1\CozyKangaroo.pdb
+C:\Users\steve\OneDrive - Swinburne University\SWE30003 Software Architectures and Design\Assignment 3\SWE30003\CozyKangaroo\CozyKangaroo\obj\Debug\netcoreapp3.1\CozyKangaroo.genruntimeconfig.cache
