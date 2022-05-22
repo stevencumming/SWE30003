@@ -10,10 +10,12 @@ namespace CozyKangaroo
             ConsoleUI console = new ConsoleUI();
 
             console.clearConsole();
-            console.heading("The Cozy Kangaroo", ConsoleColor.Red);
+            console.printHeading("The Cozy Kangaroo");
 
+            console.printJustifyLeft("Testing testing testing");
+            console.printJustifyLeft("");
 
-
+            console.lineBorder();
         }
 
         
