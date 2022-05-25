@@ -6,16 +6,8 @@ namespace CozyKangaroo
     {
         static void Main(string[] args)
         {
-            // on start, show logon?
-            ConsoleUI console = new ConsoleUI();
+           
 
-            console.clearConsole();
-            console.printHeading("The Cozy Kangaroo");
-
-            console.printJustifyLeft("Testing testing testing");
-            console.printJustifyLeft("");
-
-            console.lineBorder();
 
           
 
