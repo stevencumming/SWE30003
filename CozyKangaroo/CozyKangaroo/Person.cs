@@ -4,7 +4,8 @@ using System.Text;
 
 namespace CozyKangaroo
 {
-    class Person
+    abstract class Person
     {
+        protected string name;
     }
 }
