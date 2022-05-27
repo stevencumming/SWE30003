@@ -1,4 +1,6 @@
 
+using System;
+
 namespace CozyKangaroo 
 {
     class Customer: Person
@@ -34,13 +36,16 @@ namespace CozyKangaroo
             return null;
         }
 
-        public bool reserveTable()
+        public bool reserveTable(DateTime dateTime, int tableNumber)
         {
-            return true;
+            ApplicationFacade af = ApplicationFacade.Singleton;
+            Table table = af.Reservation.CreateReservation(this, tableNumber, dateTime);
+            return table != null ? true : false;
         }
 
         public bool payForOrder()
         {
+            currentMeal = null;
             return true;
         }
     }
