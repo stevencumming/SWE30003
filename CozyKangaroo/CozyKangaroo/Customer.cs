@@ -16,8 +16,8 @@ namespace CozyKangaroo
 
         public bool onlineOrdering() 
         {
-            Order order = new Order();
-            Menu menu = new Menu();
+            //Order order = new Order();
+            //Menu menu = new Menu();
 
             return true;
         }

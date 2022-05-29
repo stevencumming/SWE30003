@@ -18,8 +18,8 @@ namespace CozyKangaroo
 
         public bool takeCustomerOrder(Customer customer) 
         {
-            Order order = new Order();
-            Menu menu = new Menu();
+            //Order order = new Order();
+            //Menu menu = new Menu();
 
             return true;
         }
@@ -29,10 +29,10 @@ namespace CozyKangaroo
             return true;
         }
 
-        public Order getOrder(int orderId) 
-        {
-            return new Order();
-        }
+        //public Order getOrder(int orderId) 
+        //{
+        //    return new Order();
+        //}
 
         public bool giveMeal(Customer customer, Meal meal)
         {

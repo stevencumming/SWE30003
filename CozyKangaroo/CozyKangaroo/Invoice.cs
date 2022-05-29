@@ -6,6 +6,9 @@ namespace CozyKangaroo
 {
     class Invoice
     {
-        
+        public Invoice(Order order)
+        {
+
+        }
     }
 }
