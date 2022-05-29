@@ -29,64 +29,41 @@ namespace CozyKangaroo
             imageURI = aImageURI;
         }
 
-        // Getters
-        public String getName()
+        // Getters and Setters
+        public String Name
         {
-            return name;
+            get => name;
+            set => name = value;
         }
-        public String getDescription()
+        public String Description
         {
-            return description;
+            get => description;
+            set => description = value;
         }
-        public double getPrice()
+        public double Price
         {
-            return price;
+            get => price;
+            set => price = value;
         }
-        public bool getOnOffer()
+        public bool OnOffer
         {
-            return onOffer;
+            get => onOffer;
+            set => onOffer = value;
         }
-        public List<String> getIngredients()
+        public List<String> Ingredients
         {
-            return ingredients;
+            get => ingredients;
+            set => ingredients = value;
         }
-        public List<String> getAllergens()
+        public List<String> Allergens
         {
-            return allergens;
+            get => allergens;
+            set => allergens = value;
         }
-        public String getImageURI()
+        public String ImageURI
         {
-            return imageURI;
-        }
-
-        // Setters
-        public void setName(String aName)
-        {
-            name = aName;
-        }
-        public void setDescription(String aDescription)
-        {
-            description = aDescription;
-        }
-        public void setPrice(double aPrice)
-        {
-            price = aPrice;
-        }
-        public void setOnOffer(bool aOnOffer)
-        {
-            onOffer = aOnOffer;
-        }
-        public void setIngredients(List<String> aIngredients)
-        {
-            ingredients = aIngredients;
-        }
-        public void setAllergens(List<String> aAllergens)
-        {
-            allergens = aAllergens;
-        }
-        public void getImageURI(String aImageURI)
-        {
-            imageURI = aImageURI;
+            get => imageURI;
+            set => imageURI = value;
         }
     }
 }

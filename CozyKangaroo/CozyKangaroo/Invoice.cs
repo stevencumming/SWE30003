@@ -6,6 +6,6 @@ namespace CozyKangaroo
 {
     class Invoice
     {
-
+        
     }
 }

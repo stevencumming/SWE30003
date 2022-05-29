@@ -12,6 +12,13 @@ namespace CozyKangaroo
             new Table(2, 4),
             new Table(3, 1)
         });
+
+        private Menu menu = new Menu("Cozy Kangaroo - All Items", new List<Meal>
+        {
+            new Meal("name1", "description1", 1.23, false, new List<String> {"ingredient1", "ingredient2", "ingredient3"}, new List<String> {"allergen1", "allergen2"}, true, "https://imagelocation.com/image.png"),
+            new Meal("name2", "description2", 4.56, true, new List<String> {"ingredient1", "ingredient2", "ingredient3"}, new List<String> {"allergen1", "allergen2"}, true, "https://imagelocation.com/image.png"),
+            new Meal("name2", "description3", 7.89, true, new List<String> {"ingredient1", "ingredient2", "ingredient3"}, new List<String> {"allergen1", "allergen2"}, true, "https://imagelocation.com/image.png"),
+        });
         
         // Disabled default constructor
         private ApplicationFacade() {}
