@@ -8,11 +8,13 @@ namespace CozyKangaroo
     {
         private int reportID;
         List<Invoice> allOrders;
+        List<string> timeAndDates;
         // Constructor
         public Report(List<Invoice> orders,int id)
         {
             reportID = id;
             allOrders = orders;
+            TimeAndDates();
         }
         
         public void reportAllOrders()
@@ -59,6 +61,19 @@ namespace CozyKangaroo
             }
 
             return totalmoney;
+        }
+        private void TimeAndDates()
+        {
+            List<string> allTandD = new List<string>();
+            for (int i = 0; i > allOrders.Count; i++)
+            {
+                for (int x = 0; i > allOrders[i].Meals.Count; x++)
+                {
+                    allTandD[i] = allTandD + allOrders[i].TimeandDate;
+                }
+            }
+
+            timeAndDates = allTandD;
         }
     }
 }

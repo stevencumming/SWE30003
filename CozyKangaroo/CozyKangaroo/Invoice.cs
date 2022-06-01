@@ -33,11 +33,13 @@ namespace CozyKangaroo
             get => invoiceOrder.OrderType;
 
         }
-
-        public string TimePurchased
+        public string TimeandDate
         {
             get => timeOrderWasProcessed;
+
         }
+
+   
         public void generateInvoice()
         {
             // produces tax invoice if the order has been paid for
