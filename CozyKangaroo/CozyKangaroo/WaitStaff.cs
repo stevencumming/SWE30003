@@ -16,14 +16,14 @@ namespace CozyKangaroo
             this.password = password;
         }
 
-        public Order takeCustomerOrder(Menu menu, Customer customer, int orderNumber) 
+        public Order takeCustomerOrder(Menu menu, Customer customer, int orderNumber)
         {
             char orderTypeChar;
             do {
                 Console.Write(
                     "Order Type\n" +
                     "  D    Dine-in\n" +
-                    "  T    Take-away\n" +    
+                    "  T    Take-away\n" +
                     "Select order type: "
                 );
                 orderTypeChar = Console.ReadLine()[0];
@@ -35,8 +35,8 @@ namespace CozyKangaroo
             do {
                 Meal orderMeal = customer.selectMenuItem(menu, ref mealStr);
                 if (orderMeal != null) {
-                    mealList.Add(orderMeal);   
-                } 
+                    mealList.Add(orderMeal);
+                }
                 else if (mealStr != "DONE") {
                     Console.WriteLine("No meal found!");
                 }
