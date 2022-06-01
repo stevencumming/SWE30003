@@ -16,6 +16,10 @@ namespace CozyKangaroo
             this.password = password;
         }
 
+        public bool login(String username, String password) {
+            return this.username == username && this.password == password;
+        }
+
         public bool generateReport() {
             return true;
         }
