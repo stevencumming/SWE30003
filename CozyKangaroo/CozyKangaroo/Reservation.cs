@@ -113,9 +113,19 @@ namespace CozyKangaroo
             return false;
         }
 
-        
-
-        
-
+        public Table findReservation(DateTime reservationTime, int tableNumber)
+        {
+            foreach(Table t in tables)
+            {
+                if(t.TableNumber == tableNumber)
+                {
+                    if(t.TableStatus == TableStatus.Vacant && t.ReservationTime != reservationTime)
+                    {
+                        return t;
+                    }
+                }
+            }
+            return null;
+        }
     }
     }
