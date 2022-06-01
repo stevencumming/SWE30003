@@ -19,7 +19,7 @@ namespace CozyKangaroo
             Console.WriteLine("New Order | Order number: " + invoiceToPrint.orderNumber);
             for (int i = 0; i < invoiceToPrint.Meals.Count; i++)
             {
-                Console.WriteLine("item " + i + " : " + invoiceToPrint.Meals[i].Name + " | Price Of Item : " + invoiceOrder.Meals[i].Price);
+                Console.WriteLine("item " + i + " : " + invoiceToPrint.Meals[i].Name + " | Price Of Item : " + invoiceToPrint.Meals[i].Price);
             }
             switch (invoiceToPrint.OrderType)
             {
