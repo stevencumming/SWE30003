@@ -76,6 +76,11 @@ namespace CozyKangaroo
             orderStatus = aOrderStatus;
         }
 
+        public void addMeal(Meal meal)
+        {
+            meals.Add(meal);
+        }
+
         public double OrderTotal()
         {
             // Calculate the total price of each item in the order
