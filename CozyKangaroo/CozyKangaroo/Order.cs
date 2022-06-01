@@ -78,6 +78,13 @@ namespace CozyKangaroo
             get => orderType;
 
         }
+        public int TableNumber
+        {
+            get
+            {
+                return table.TableNumber;
+            }
+        }
 
         // Update Order Status
         public void setOrderStatus(OrderStatus aOrderStatus)
