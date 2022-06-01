@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\steve\\OneDrive - Swinburne University\\SWE30003 Software Architectures and Design\\Assignment 3\\SWE30003\\CozyKangaroo\\CozyKangaroo\\CozyKangaroo.csproj": {}
+    "C:\\Users\\conno\\Source\\Repos\\stevencumming\\SWE30003\\CozyKangaroo\\CozyKangaroo\\CozyKangaroo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\steve\\OneDrive - Swinburne University\\SWE30003 Software Architectures and Design\\Assignment 3\\SWE30003\\CozyKangaroo\\CozyKangaroo\\CozyKangaroo.csproj": {
+    "C:\\Users\\conno\\Source\\Repos\\stevencumming\\SWE30003\\CozyKangaroo\\CozyKangaroo\\CozyKangaroo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\steve\\OneDrive - Swinburne University\\SWE30003 Software Architectures and Design\\Assignment 3\\SWE30003\\CozyKangaroo\\CozyKangaroo\\CozyKangaroo.csproj",
+        "projectUniqueName": "C:\\Users\\conno\\Source\\Repos\\stevencumming\\SWE30003\\CozyKangaroo\\CozyKangaroo\\CozyKangaroo.csproj",
         "projectName": "CozyKangaroo",
-        "projectPath": "C:\\Users\\steve\\OneDrive - Swinburne University\\SWE30003 Software Architectures and Design\\Assignment 3\\SWE30003\\CozyKangaroo\\CozyKangaroo\\CozyKangaroo.csproj",
-        "packagesPath": "C:\\Users\\steve\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\steve\\OneDrive - Swinburne University\\SWE30003 Software Architectures and Design\\Assignment 3\\SWE30003\\CozyKangaroo\\CozyKangaroo\\obj\\",
+        "projectPath": "C:\\Users\\conno\\Source\\Repos\\stevencumming\\SWE30003\\CozyKangaroo\\CozyKangaroo\\CozyKangaroo.csproj",
+        "packagesPath": "C:\\Users\\conno\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\conno\\Source\\Repos\\stevencumming\\SWE30003\\CozyKangaroo\\CozyKangaroo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\conno\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +26,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,7 +37,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "imports": [
             "net461",
             "net462",
@@ -54,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
