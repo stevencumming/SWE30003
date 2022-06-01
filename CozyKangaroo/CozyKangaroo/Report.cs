@@ -6,5 +6,11 @@ namespace CozyKangaroo
 {
     class Report
     {
+        // Constructor
+        public Report(Order order)
+        {
+            invoiceOrder = order;
+            purchasedMeals = order.Meals;
+        }
     }
 }

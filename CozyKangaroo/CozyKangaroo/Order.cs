@@ -69,6 +69,15 @@ namespace CozyKangaroo
         {
             get => orderNumber;
         }
+        public List<Meal> Meals
+        {
+            get => meals;
+        }
+        public OrderType OrderType
+        {
+            get => orderType;
+
+        }
 
         // Update Order Status
         public void setOrderStatus(OrderStatus aOrderStatus)
