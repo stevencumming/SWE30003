@@ -16,32 +16,55 @@ namespace CozyKangaroo
             this.password = password;
         }
 
-        public bool takeCustomerOrder(Customer customer) 
+        public Order takeCustomerOrder(Menu menu, Customer customer, int orderNumber) 
         {
-            //Order order = new Order();
-            //Menu menu = new Menu();
+            char orderTypeChar;
+            do {
+                Console.Write(
+                    "Order Type\n" +
+                    "  D    Dine-in\n" +
+                    "  T    Take-away\n" +    
+                    "Select order type: "
+                );
+                orderTypeChar = Console.ReadLine()[0];
+            } while (orderTypeChar != 'D' || orderTypeChar != 'T');
+            OrderType orderType = orderTypeChar == 'D' ? OrderType.DineIn : OrderType.Takeaway;
 
-            return true;
+            String mealStr = "";
+            List<Meal> mealList = new List<Meal>();
+            do {
+                Meal orderMeal = customer.selectMenuItem(menu, ref mealStr);
+                if (orderMeal != null) {
+                    mealList.Add(orderMeal);   
+                } 
+                else if (mealStr != "DONE") {
+                    Console.WriteLine("No meal found!");
+                }
+            } while (mealStr != "DONE");
+
+            // Add dine-in conditional code block
+
+            return new Order(orderNumber, mealList, orderType, customer);
         }
 
-        public bool editOrder(Order order)
+        public void addMealToOrder(Order order, Meal meal)
         {
-            return true;
+            order.addMeal(meal);
         }
 
-        //public Order getOrder(int orderId) 
-        //{
-        //    return new Order();
-        //}
+        public Order getOrder(int orderId) 
+        {
+            return ApplicationFacade.Singleton.GetOrder(orderId);
+        }
 
         public bool giveMeal(Customer customer, Meal meal)
         {
             return customer.recieveMeal(meal);
         }
 
-        public bool markOrderComplete(Order order)
+        public void markOrderComplete(Order order)
         {
-            return true;
+            order.setOrderStatus(OrderStatus.Complete);
         }
     }
 }
