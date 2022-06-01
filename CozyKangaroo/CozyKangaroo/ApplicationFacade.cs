@@ -23,10 +23,16 @@ namespace CozyKangaroo
             new Meal("name3", "description3", 7.89, true, new List<String> {"ingredient1", "ingredient2", "ingredient3"}, new List<String> {"allergen1", "allergen2"}, true, "https://imagelocation.com/image.png"),
         });
 
-        private List<Order> orders = new List<Order>
+        static private List<Order> orders = new List<Order>
         {
             new Order(1, new List<Meal> { menu.GetMeal("name1"), menu.GetMeal("name2") }, OrderType.Takeaway, lsampleCustomer),
             new Order(1, new List<Meal> { menu.GetMeal("name3"), menu.GetMeal("name1") }, OrderType.DineIn, lsampleCustomer)
+        };
+
+        private List<Invoice> invoices = new List<Invoice>
+        {
+            new Invoice(orders[0]),
+            new Invoice(orders[1])
         };
         
         // Disabled default constructor
