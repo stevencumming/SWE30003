@@ -26,7 +26,7 @@ namespace CozyKangaroo
                     "Select order type: "
                 );
                 orderTypeChar = Console.ReadLine()[0];
-            } while (orderTypeChar != 'D' || orderTypeChar != 'T');
+            } while (orderTypeChar != 'D' && orderTypeChar != 'T');
             OrderType orderType = orderTypeChar == 'D' ? OrderType.DineIn : OrderType.Takeaway;
 
             String mealStr = "";
@@ -77,6 +77,11 @@ namespace CozyKangaroo
         {
             currentMeal = null;
             return order.pay();
+        }
+
+        public String Email
+        {
+            get => email;
         }
     }
 }
