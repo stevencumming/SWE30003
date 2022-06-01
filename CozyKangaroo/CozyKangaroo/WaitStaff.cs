@@ -16,6 +16,10 @@ namespace CozyKangaroo
             this.password = password;
         }
 
+        public bool login(String username, String password) {
+            return this.username == username && this.password == password;
+        }
+
         public Order takeCustomerOrder(Menu menu, Customer customer, int orderNumber)
         {
             char orderTypeChar;
@@ -27,7 +31,7 @@ namespace CozyKangaroo
                     "Select order type: "
                 );
                 orderTypeChar = Console.ReadLine()[0];
-            } while (orderTypeChar != 'D' || orderTypeChar != 'T');
+            } while (orderTypeChar != 'D' && orderTypeChar != 'T');
             OrderType orderType = orderTypeChar == 'D' ? OrderType.DineIn : OrderType.Takeaway;
 
             String mealStr = "";
