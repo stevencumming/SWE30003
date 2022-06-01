@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections.Generic;
 
 namespace CozyKangaroo 
 {
@@ -14,12 +15,35 @@ namespace CozyKangaroo
             this.email = email;
         }
 
-        public bool onlineOrdering() 
+        public Order onlineOrdering(Menu menu, int orderNumber)
         {
-            //Order order = new Order();
-            //Menu menu = new Menu();
+            char orderTypeChar;
+            do {
+                Console.Write(
+                    "Order Type\n" +
+                    "  D    Dine-in\n" +
+                    "  T    Take-away\n" +
+                    "Select order type: "
+                );
+                orderTypeChar = Console.ReadLine()[0];
+            } while (orderTypeChar != 'D' || orderTypeChar != 'T');
+            OrderType orderType = orderTypeChar == 'D' ? OrderType.DineIn : OrderType.Takeaway;
 
-            return true;
+            String mealStr = "";
+            List<Meal> mealList = new List<Meal>();
+            do {
+                Meal orderMeal = selectMenuItem(menu, ref mealStr);
+                if (orderMeal != null) {
+                    mealList.Add(orderMeal);
+                }
+                else if (mealStr != "DONE") {
+                    Console.WriteLine("No meal found!");
+                }
+            } while (mealStr != "DONE");
+
+            // Add dine-in conditional code block
+
+            return new Order(orderNumber, mealList, orderType, this);
         }
 
         public bool recieveMeal(Meal meal)
@@ -31,9 +55,15 @@ namespace CozyKangaroo
             return true;
         }
 
-        public Meal selectMenuItem()
+        public Meal selectMenuItem(Menu menu, ref String mealStr)
         {
-            return null;
+            menu.PrintMenu();
+            Console.Write(
+                "(Type 'DONE' when done)\n" +
+                "Enter meal name: "
+            );
+            mealStr = Console.ReadLine().Trim();
+            return menu.GetMeal(mealStr);
         }
 
         public bool reserveTable(DateTime dateTime, int tableNumber)
@@ -43,10 +73,10 @@ namespace CozyKangaroo
             return table != null ? true : false;
         }
 
-        public bool payForOrder()
+        public Invoice payForOrder(Order order)
         {
             currentMeal = null;
-            return true;
+            return order.pay();
         }
     }
 }
