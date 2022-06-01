@@ -45,6 +45,7 @@ namespace CozyKangaroo
             {
                 Console.WriteLine("Thankyou For Shopping with the COZY KANGAROO");
                 Console.WriteLine("Your Order Number :   " + invoiceOrder.OrderNumber);
+                Console.WriteLine("Your Table Number(if you are Dining in ) :   " + invoiceOrder.TableNumber);
 
                 Console.WriteLine("Your Ordered Items  :   ");
                 for (int i = 0; i < invoiceOrder.Meals.Count; i++)
