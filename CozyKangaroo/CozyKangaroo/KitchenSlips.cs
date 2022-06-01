@@ -17,6 +17,8 @@ namespace CozyKangaroo
         public void printKitchenSlip()
         {
             Console.WriteLine("New Order | Order number: " + invoiceToPrint.orderNumber);
+            Console.WriteLine("Time Order Was Placed: " + invoiceToPrint.TimePurchased);
+            
             for (int i = 0; i < invoiceToPrint.Meals.Count; i++)
             {
                 Console.WriteLine("item " + i + " : " + invoiceToPrint.Meals[i].Name + " | Price Of Item : " + invoiceToPrint.Meals[i].Price);

@@ -9,12 +9,14 @@ namespace CozyKangaroo
     class Invoice
     {
         private Order invoiceOrder;
+        private String timeOrderWasProcessed;
         private List<Meal> purchasedMeals;
         // Constructor
         public Invoice(Order order)
         {
             invoiceOrder = order;
             purchasedMeals = order.Meals;
+            timeOrderWasProcessed = DateTime.Now.ToString("hh:mm:ss");
         }
 
         // Getters and Setters
@@ -32,6 +34,10 @@ namespace CozyKangaroo
 
         }
 
+        public string TimePurchased
+        {
+            get => timeOrderWasProcessed;
+        }
         public void generateInvoice()
         {
             // produces tax invoice if the order has been paid for
