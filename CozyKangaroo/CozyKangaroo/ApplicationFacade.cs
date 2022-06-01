@@ -101,10 +101,7 @@ namespace CozyKangaroo
 
         public Reservation Reservation
         {
-            get 
-            {
-                return reservation;
-            }
+            get => reservation;
         }
 
         public Order GetOrder(int orderNumber)
