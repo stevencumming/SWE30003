@@ -7,7 +7,17 @@ namespace CozyKangaroo
     sealed class ApplicationFacade
     {
         private static ApplicationFacade singleton = null;
-        private static Person lsampleCustomer = new Customer("Customer 1", "cust1@example.org");
+
+        private static List<Customer> customers = new List<Customer>
+        {
+            new Customer("Customer 1", "cust1@example.org")
+        };
+
+        private static List<Person> staff = new List<Person>
+        {
+            new Manager("Frank", "boss_man", "i_am_cool"),
+            new WaitStaff("Sam", "sam_1998", "sam_i_am")
+        };
 
         private Reservation reservation = new Reservation(new List<Table>
         {
@@ -25,8 +35,8 @@ namespace CozyKangaroo
 
         static private List<Order> orders = new List<Order>
         {
-            new Order(1, new List<Meal> { menu.GetMeal("name1"), menu.GetMeal("name2") }, OrderType.Takeaway, lsampleCustomer),
-            new Order(1, new List<Meal> { menu.GetMeal("name3"), menu.GetMeal("name1") }, OrderType.DineIn, lsampleCustomer)
+            new Order(1, new List<Meal> { menu.GetMeal("name1"), menu.GetMeal("name2") }, OrderType.Takeaway, customers[0]),
+            new Order(1, new List<Meal> { menu.GetMeal("name3"), menu.GetMeal("name1") }, OrderType.DineIn, customers[0])
         };
 
         private List<Invoice> invoices = new List<Invoice>
@@ -52,14 +62,7 @@ namespace CozyKangaroo
 
         static void Main(string[] args)
         {
-            // Whatever...
-
-
-
-
-
-
-
+            Login();
             while (true)
             {
                 Console.Clear();
@@ -87,22 +90,98 @@ namespace CozyKangaroo
 
                 Console.ReadLine();
             }
-
-            
-
-
-
-
-
-
         }
 
-        static void Login()
+        static Person Login()
         {
-            Console.WriteLine("Enter user name");
-            // can also be customer!
+            Person person = null;
+            char loginType;
+            do {
+                Console.Write(
+                    "Login Type\n" +
+                    "  C    Customer Login\n" +
+                    "  S    Staff Login\n" +
+                    "Select login type: "
+                );
+                loginType = Console.ReadLine().Trim()[0];
+            } while (loginType != 'C' && loginType != 'S');
+            switch (loginType) {
+                case 'C':
+                    person = customerScreen();
+                    break;
+                case 'S':
+                    person = loginStaff();
+                    break;
+            }
+            return person;
+        }
 
-            
+        private static Customer customerScreen()
+        {
+            Customer customer = null;
+            char loginOpt;
+            do {
+                Console.Write(
+                    "Cozy Kangaroo\n" +
+                    "  L    Login\n" +
+                    "  C    Create Account\n" +
+                    "Select login type: "
+                );
+                loginOpt = Console.ReadLine().Trim()[0];
+            } while (loginOpt != 'L' && loginOpt != 'C');
+
+            switch (loginOpt) {
+                case 'L':
+                    customer = loginCustomer();
+                    break;
+                case 'C':
+                    customer = createCustomer();
+                    break;
+            }
+            return customer;
+        }
+
+        private static Customer loginCustomer()
+        {
+            Customer customer;
+            String name;
+            String email;
+            do {
+                Console.Write("Enter name: ");
+                name = Console.ReadLine().Trim();
+                Console.Write("Enter email: ");
+                email = Console.ReadLine().Trim();
+                customer = getCustomer(email);
+            } while (customer == null);
+            return customer;
+        }
+
+        private static Person loginStaff()
+        {
+            Person staff;
+            String username;
+            String password;
+            do {
+                Console.Write("Enter username: ");
+                username = Console.ReadLine().Trim();
+                Console.Write("Enter password: ");
+                password = Console.ReadLine().Trim();
+                staff = getStaff(username, password);
+            } while (staff == null);
+            return staff;
+        }
+
+        private static Customer createCustomer()
+        {
+            String name;
+            String email;
+            do {
+                Console.Write("Enter name: ");
+                name = Console.ReadLine().Trim();
+                Console.Write("Enter email: ");
+                email = Console.ReadLine().Trim();
+            } while (getCustomer(email) != null);
+            return new Customer(name, email);
         }
 
         public Reservation Reservation
@@ -114,6 +193,28 @@ namespace CozyKangaroo
         {
             // Get order with ID (int)
             return orders.Find(order => order.OrderNumber == orderNumber);
+        }
+
+        private static Customer getCustomer(String email)
+        {
+            foreach (Customer customer in customers) {
+                if (email == customer.Email) {
+                    return customer;
+                }
+            }
+            return null;
+        }
+
+        private static Person getStaff(String username, String password)
+        {
+            foreach (Person person in staff) {
+                if (person is Manager && ((Manager) person).login(username, password)) {
+                    return person;
+                } else if (person is WaitStaff && ((WaitStaff) person).login(username, password)) {
+                    return person;
+                }
+            }
+            return null;
         }
     }
 }
