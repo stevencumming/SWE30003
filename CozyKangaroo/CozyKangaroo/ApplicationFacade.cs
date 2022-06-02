@@ -50,9 +50,7 @@ namespace CozyKangaroo
             new Invoice(orders[1])
         };
 
-        private List<Report> reports = new List<Report>
-        {
-        };
+        private static List<Report> reports = new List<Report>();
 
         // Disabled default constructor
         private ApplicationFacade() {}
@@ -73,14 +71,14 @@ namespace CozyKangaroo
         {
             Person person = Login();
             switch (person) {
-                case Customer:
-                    customerMenu((Customer) person);
+                case Customer customer:
+                    customerMenu(customer);
                     break;
-                case WaitStaff:
-                    waitStaffMenu((WaitStaff) person);
+                case WaitStaff waitstaff:
+                    waitStaffMenu(waitstaff);
                     break;
-                case Manager:
-                    managerMenu((Manager) person);
+                case Manager manager:
+                    managerMenu(manager);
                     break;
             }
         }
@@ -292,7 +290,7 @@ namespace CozyKangaroo
                     "Manager Menu\n" +
                     "  G    Generate Complete Report\n" +
                     "  V    View Report\n" +
-                    "  X    Exit\n"
+                    "  X    Exit\n" +
                     "Select option: "
                 );
                 selection = Console.ReadLine().Trim()[0];
@@ -301,8 +299,8 @@ namespace CozyKangaroo
                         reports.Add(manager.generateReport(reportId++));
                         break;
                     case 'V':
-                        Char reportId = Console.ReadLine().Trim()[0];
-                        getReport(reportId).reportAllOrders();
+                        Char viewReportId = Console.ReadLine().Trim()[0];
+                        getReport(viewReportId).reportAllOrders();
                         Console.ReadLine();
                         break;
                 }
@@ -350,7 +348,7 @@ namespace CozyKangaroo
         private static Report getReport(int reportId)
         {
             foreach (Report report in reports) {
-                if (report.reportID == reportID) {
+                if (report.ReportID == reportId) {
                     return report;
                 }
             }
