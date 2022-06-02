@@ -27,7 +27,6 @@ namespace CozyKangaroo
         private OrderType orderType;
         private Person placedBy;
         private Table table;
-        private Reservation reservation;
         private OrderStatus orderStatus;
         private bool paid;
 
@@ -44,7 +43,7 @@ namespace CozyKangaroo
         }
 
         // Overloaded constructor (for dine-in)
-        public Order(int aOrderNumber, List<Meal> aMeals, OrderType aOrderType, Person aPlacedBy, Table aTable, Reservation aReservation)
+        public Order(int aOrderNumber, List<Meal> aMeals, OrderType aOrderType, Person aPlacedBy, Table aTable)
         {
             if (aOrderType != OrderType.DineIn)
             {
@@ -58,7 +57,6 @@ namespace CozyKangaroo
             orderType = aOrderType;
             placedBy = aPlacedBy;
             table = aTable;
-            reservation = aReservation;
 
             orderStatus = OrderStatus.Placed;
             paid = false;
@@ -227,7 +225,7 @@ namespace CozyKangaroo
 
         public override string ToString() {
             String output = $"Order {orderNumber}\n";
-            int count = 0;
+            int count = 1;
             foreach (Meal meal in meals) {
                 output += $"{count++}. {meal.Name}\n";
             }
