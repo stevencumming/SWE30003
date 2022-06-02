@@ -24,7 +24,7 @@ namespace CozyKangaroo
             this.tables = tables;
         }
 
-        public Table createReservation(Customer customer, int tableNumber, DateTime reservationTime)
+        public Table CreateReservation(Customer customer, int tableNumber, DateTime reservationTime)
         {
             // first of all, check if the table is availabe or not
             if (IsTableAvailable(reservationTime, tableNumber))
@@ -44,7 +44,7 @@ namespace CozyKangaroo
             return null;
         }
 
-        public void cancelReservation(Customer cusomter, int tableNumber, DateTime reservationTime)
+        public void CancelReservation(Customer cusomter, int tableNumber, DateTime reservationTime)
         {
 
             if (IsTableAvailable(reservationTime, tableNumber) == false)
@@ -63,7 +63,7 @@ namespace CozyKangaroo
 
         }
 
-        public void addNewTable(Table table)
+        public void AddNewTable(Table table)
         {
             for (int i = 0; i < this.tables.Count; i++)
             {
@@ -81,7 +81,7 @@ namespace CozyKangaroo
 
 
 
-        public int getTableIndex(int tableNumber)
+        public int GetTableIndex(int tableNumber)
         {
             for(int i = 0; i< this.tables.Count; i++)
             {
@@ -96,7 +96,7 @@ namespace CozyKangaroo
         }
     
      
-        public Boolean isTableAvailable(DateTime reservationTime, int tableNumber)
+        public Boolean IsTableAvailable(DateTime reservationTime, int tableNumber)
         {
 
             foreach(Table t in tables)
@@ -113,7 +113,7 @@ namespace CozyKangaroo
             return false;
         }
 
-        public Table findReservation(DateTime reservationTime, int tableNumber)
+        public Table FindReservation(DateTime reservationTime, int tableNumber)
         {
             foreach(Table t in tables)
             {
