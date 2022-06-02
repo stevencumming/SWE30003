@@ -56,11 +56,6 @@ namespace CozyKangaroo
             order.addMeal(meal);
         }
 
-        public Order getOrder(int orderId) 
-        {
-            return ApplicationFacade.Singleton.GetOrder(orderId);
-        }
-
         public bool giveMeal(Customer customer, Meal meal)
         {
             return customer.recieveMeal(meal);
