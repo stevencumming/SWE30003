@@ -6,6 +6,9 @@ namespace CozyKangaroo
 {
     sealed class ApplicationFacade
     {
+        // Set to 2 since we have some orders pre-defined
+        private static int orderNumber = 2;
+
         private static ApplicationFacade singleton = null;
 
         private static List<Customer> customers = new List<Customer>
@@ -35,7 +38,7 @@ namespace CozyKangaroo
 
         static private List<Order> orders = new List<Order>
         {
-            new Order(1, new List<Meal> { menu.GetMeal("name1"), menu.GetMeal("name2") }, OrderType.Takeaway, customers[0]),
+            new Order(0, new List<Meal> { menu.GetMeal("name1"), menu.GetMeal("name2") }, OrderType.Takeaway, customers[0]),
             new Order(1, new List<Meal> { menu.GetMeal("name3"), menu.GetMeal("name1") }, OrderType.DineIn, customers[0])
         };
 
@@ -62,33 +65,15 @@ namespace CozyKangaroo
 
         static void Main(string[] args)
         {
-            Login();
-            while (true)
-            {
-                Console.Clear();
-                Console.WriteLine("Sample Menu Screen:");
-                Console.WriteLine("  N    New Order");
-                Console.WriteLine("  V    View Menu");
-                string lInput = Console.ReadLine();
-                char lSelection = (lInput == null ? ' ' : lInput[0]);
-                switch (lSelection)
-                {
-                    case 'C':
-                        Console.WriteLine("Paying Cash:");
-
-                        break;
-                    case 'V':
-                        Console.WriteLine("View Menu:");
-                        menu.PrintMenu();
-
-                        break;
-                    default:
-                        Console.WriteLine("Please enter a valid selection.");
-                        break;
-                }
-
-
-                Console.ReadLine();
+            Person person = Login();
+            switch (person) {
+                case Customer:
+                    customerMenu((Customer) person);
+                    break;
+                case WaitStaff:
+                    break;
+                case Manager:
+                    break;
             }
         }
 
@@ -184,6 +169,35 @@ namespace CozyKangaroo
             return new Customer(name, email);
         }
 
+        private static void customerMenu(Customer customer)
+        {
+            Char selection;
+            do {
+                Console.Clear();
+                Console.Write(
+                    "Cusomer Menu\n" +
+                    "  N    New Online Order\n" +
+                    "  M    View Menu\n" +
+                    "  O    View Orders\n" +
+                    "  X    Exit\n" +
+                    "Select option: "
+                );
+                selection = Console.ReadLine().Trim()[0];
+                switch (selection) {
+                    case 'N':
+                        orders.Add(customer.onlineOrdering(menu, orderNumber++));
+                        break;
+                    case 'M':
+                        menu.PrintMenu();
+                        Console.ReadLine();
+                        break;
+                    case 'O':
+                        printOrders(customer);
+                        break;
+                }
+            } while (selection != 'X');
+        }
+
         public Reservation Reservation
         {
             get => reservation;
@@ -215,6 +229,16 @@ namespace CozyKangaroo
                 }
             }
             return null;
+        }
+
+        private static void printOrders(Customer customer)
+        {
+            foreach (Order order in orders) {
+                if (order.PlacedBy == customer) {
+                    Console.WriteLine(order.ToString());
+                }
+            }
+            Console.ReadLine();
         }
     }
 }
