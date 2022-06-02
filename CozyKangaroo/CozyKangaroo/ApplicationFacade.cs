@@ -24,12 +24,15 @@ namespace CozyKangaroo
             new WaitStaff("Sam", "sam_1998", "sam_i_am")
         };
 
-        private Reservation reservation = new Reservation(new List<Table>
+        private List<Reservation> reservations = new List<Reservation>
         {
-            new Table(1, 2),
-            new Table(2, 4),
-            new Table(3, 1)
-        });
+            new Reservation(new List<Table>
+            {
+                new Table(1, 2),
+                new Table(2, 4),
+                new Table(3, 1)
+            })
+        };
 
         static private Menu menu = new Menu("Cozy Kangaroo - All Items", new List<Meal>
         {
