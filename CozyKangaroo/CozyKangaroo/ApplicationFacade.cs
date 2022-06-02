@@ -70,16 +70,12 @@ namespace CozyKangaroo
         static void Main(string[] args)
         {
             Person person = Login();
-            switch (person) {
-                case Customer customer:
-                    customerMenu(customer);
-                    break;
-                case WaitStaff waitstaff:
-                    waitStaffMenu(waitstaff);
-                    break;
-                case Manager manager:
-                    managerMenu(manager);
-                    break;
+            if (person.GetType() == typeof(Customer)) {
+                customerMenu((Customer) person);
+            } else if (person.GetType() == typeof(WaitStaff)) {
+                waitStaffMenu((WaitStaff) person);
+            } else if (person.GetType() == typeof(Manager)) {
+                managerMenu((Manager) person);
             }
         }
 
