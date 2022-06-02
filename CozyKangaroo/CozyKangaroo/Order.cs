@@ -142,7 +142,12 @@ namespace CozyKangaroo
                         Console.WriteLine("Please select your payment method:");
                         Console.WriteLine("  C    Cash");
                         Console.WriteLine("  E    EFTPOS / Credit Card");
-                        char lSelection = Console.ReadLine()[0];
+                        string lSelectionStr = Console.ReadLine().Trim().ToUpper();
+                        if (lSelectionStr == "") {
+                            Console.WriteLine("\nPlease enter in a valid payment method!\n");
+                            continue;
+                        }
+                        char lSelection = lSelectionStr[0];
 
                         switch (lSelection)
                         {
@@ -153,7 +158,13 @@ namespace CozyKangaroo
                                 double lCashDue = Math.Round(OrderTotal() / 100 / 5.0) * 5 * 100;
                                 Console.WriteLine("Total Cash Due: " + lCashDue);
                                 Console.WriteLine("Enter Cash Paid: (e.g. 12.34)");
-                                double lCashPaid = Convert.ToDouble(Console.ReadLine());
+                                double lCashPaid;
+                                try {
+                                    lCashPaid = Convert.ToDouble(Console.ReadLine().Trim());
+                                } catch {
+                                    Console.WriteLine("\nPlease enter in a valid payment amount!\n");
+                                    continue;
+                                }
 
                                 // calculate change
                                 Console.WriteLine("Change is: " + (lCashDue - lCashPaid));
