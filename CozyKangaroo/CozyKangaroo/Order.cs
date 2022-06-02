@@ -69,15 +69,23 @@ namespace CozyKangaroo
         {
             get => orderNumber;
         }
+
+        public Person PlacedBy
+        {
+            get => placedBy;
+        }
+
         public List<Meal> Meals
         {
             get => meals;
         }
+
         public OrderType OrderType
         {
             get => orderType;
 
         }
+
         public int TableNumber
         {
             get
@@ -217,6 +225,13 @@ namespace CozyKangaroo
             return new Invoice(this);
         }
 
-
+        public override string ToString() {
+            String output = $"Order {orderNumber}\n";
+            int count = 0;
+            foreach (Meal meal in meals) {
+                output += $"{count++}. {meal.Name}\n";
+            }
+            return output;
+        }
     }
 }
