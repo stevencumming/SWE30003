@@ -21,22 +21,30 @@ namespace CozyKangaroo
         }
 
         public Report generateReport(int reportId) {
-            Char reportType;
+            string reportTypeStr;
+            char reportTypeChar = ' ';
             do {
+                if (reportTypeChar != ' ') {
+                    Console.WriteLine("\nPlease enter a valid report type!\n");
+                }
                 Console.Write(
                     "Generate Report Type\n" +
                     "  A    All Invoice Report\n" +
                     "  X    Exit\n" +
                     "Select report type to generate: "
                 );
-                reportType = Console.ReadLine().Trim()[0];
-            } while (reportType != 'A' && reportType != 'X');
+                reportTypeStr = Console.ReadLine().Trim().ToUpper();
+                if (reportTypeStr != "") {
+                    reportTypeChar = reportTypeStr[0];
+                }
+            } while (reportTypeChar != 'A' && reportTypeChar != 'X');
 
             Report report = null;
-            switch (reportType) {
+            switch (reportTypeChar) {
                 case 'A':
                     report = new Report(ApplicationFacade.Singleton.Invoices, reportId);
                     break;
+                // Has room for extension
             }
             return report;
         }
