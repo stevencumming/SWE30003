@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 
 namespace CozyKangaroo
 {
@@ -23,49 +22,80 @@ namespace CozyKangaroo
 
         public Order takeCustomerOrder(Menu menu, Customer customer, int orderNumber)
         {
-            char orderTypeChar;
+            string orderTypeStr;
+            char orderTypeChar = ' ';
             do {
+                if (orderTypeChar != ' ') {
+                    Console.WriteLine("\nPlease enter a correct order type!\n");
+                }
                 Console.Write(
                     "Order Type\n" +
                     "  D    Dine-in\n" +
                     "  T    Take-away\n" +
                     "Select order type: "
                 );
-                orderTypeChar = Console.ReadLine()[0];
+                orderTypeStr = Console.ReadLine().Trim().ToUpper();
+                if (orderTypeStr != "") {
+                    orderTypeChar = orderTypeStr[0];
+                }
             } while (orderTypeChar != 'D' && orderTypeChar != 'T');
             OrderType orderType = orderTypeChar == 'D' ? OrderType.DineIn : OrderType.Takeaway;
 
-            String mealStr = "";
+            string mealStr = "";
             List<Meal> mealList = new List<Meal>();
             do {
                 Meal orderMeal = customer.selectMenuItem(menu, ref mealStr);
                 if (orderMeal != null) {
                     mealList.Add(orderMeal);
                 }
-                else if (mealStr != "DONE") {
-                    Console.WriteLine("No meal found!");
+                else if (mealStr.ToUpper() != "DONE") {
+                    Console.WriteLine("\nNo meal found!\n");
                 }
-            } while (mealStr != "DONE");
+            } while (mealStr.ToUpper() != "DONE");
 
             if (orderType == OrderType.DineIn) {
-                Console.Write("Do you have a reservation (y/N): ");
-                char hasReservation = Console.ReadLine().Trim().ToUpper()[0];
+                string hasReservationStr;
+                char hasReservationChar = ' ';
+                do {
+                    if (hasReservationChar != ' ') {
+                        Console.WriteLine("\nPlease enter a correct answer!\n");
+                    }
+                    Console.Write("Do you have a reservation (y/N): ");
+                    hasReservationStr = Console.ReadLine().Trim().ToUpper();
+                    if (hasReservationStr == "") {
+                        hasReservationChar = hasReservationStr[0];
+                    }
+                } while (hasReservationChar != 'Y' && hasReservationChar != 'N');
+
                 Table table;
-                if (hasReservation == 'Y') {
-                    String format = "MM/dd/yyyy hh:mm";
-                    Console.Write($"Reservation date time (format {format}): ");
-                    String dateTimeStr = Console.ReadLine().Trim();
-                    DateTime dateTime = DateTime.ParseExact(dateTimeStr, format, new CultureInfo("en-AU"));
-                    Console.Write("Table number: ");
-                    int tableNumber = Convert.ToInt32(Console.ReadLine().Trim());
+                if (hasReservationChar == 'Y') {
+                    string format = "dd-MM-yyyy HH:mm";
+                    CultureInfo local = new CultureInfo("en-AU");
+                    string dateTimeStr;
+                    bool dateConverted = false;
+                    DateTime dateTime;
+                    int tableNumber = -1;
                     ApplicationFacade af = ApplicationFacade.Singleton;
-                    table = af.Reservation.FindReservation(dateTime, tableNumber);
+                    do {
+                        Console.Write($"Reservation date time (format {format}): ");
+                        dateTimeStr = Console.ReadLine().Trim();
+                        dateConverted = DateTime.TryParseExact(dateTimeStr, format, local, new DateTimeStyles(), out dateTime);
+                        Console.Write("Table number: ");
+                        try {
+                            tableNumber = Convert.ToInt32(Console.ReadLine().Trim());
+                        } catch {
+                            Console.WriteLine("\nPlease enter a valid table number!\n");
+                        }
+                        if (!dateConverted) {
+                            Console.WriteLine("\nPlease enter in a valid date time!\n");
+                        }
+                        table = af.Reservation.FindReservation(dateTime, tableNumber);
+                    } while (!dateConverted || table == null);
                 } else {
                     table = customer.reserveTable();
                 }
                 return new Order(orderNumber, mealList, orderType, customer, table);
             }
-
             return new Order(orderNumber, mealList, orderType, customer);
         }
 
