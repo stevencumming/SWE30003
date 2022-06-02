@@ -81,5 +81,12 @@ namespace CozyKangaroo
             }
         }
 
+        public override string ToString()
+        {
+            return "\nTable Reservation\n" +
+                $"Number of Seats: {this.NumberOfSeats}\n" +
+                $"Reservation Time: {this.ReservationTime}\n" +
+                $"Table Number: {this.TableNumber}\n";
+        }
     }
 }
