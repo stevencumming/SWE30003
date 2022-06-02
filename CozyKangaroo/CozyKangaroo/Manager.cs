@@ -26,7 +26,7 @@ namespace CozyKangaroo
                 Console.Write(
                     "Generate Report Type\n" +
                     "  A    All Invoice Report\n" +
-                    "  X    Exit\n"
+                    "  X    Exit\n" +
                     "Select report type to generate: "
                 );
                 reportType = Console.ReadLine().Trim()[0];
