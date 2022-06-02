@@ -71,6 +71,7 @@ namespace CozyKangaroo
                     customerMenu((Customer) person);
                     break;
                 case WaitStaff:
+                    waitStaffMenu((WaitStaff) person);
                     break;
                 case Manager:
                     break;
@@ -198,12 +199,89 @@ namespace CozyKangaroo
             } while (selection != 'X');
         }
 
+        private static void waitStaffMenu(WaitStaff waitStaff)
+        {
+            Char selection;
+            do {
+                Console.Clear();
+                Console.Write(
+                    "Wait Staff Menu\n" +
+                    "  N    New Customer Order\n" +
+                    "  A    Add Meal to Order\n" +
+                    "  O    Get Order\n" +
+                    "  G    Give Meal to Customer\n" +
+                    "  M    Mark Order Complete\n" +
+                    "  X    Exit\n" +
+                    "Select option: ");
+                selection = Console.ReadLine().Trim()[0];
+                switch (selection) {
+                    case 'N':
+                        String customerEmail;
+                        Customer customer;
+                        do {
+                            Console.Write("Enter customer email: ");
+                            customerEmail = Console.ReadLine().Trim();
+                            customer = getCustomer(customerEmail);
+                        } while (customer == null);
+                        orders.Add(waitStaff.takeCustomerOrder(menu, customer, orderNumber++));
+                        break;
+                    case 'A':
+                        menu.PrintMenu();
+                        Console.Write("Enter meal name: ");
+                        String mealName = Console.ReadLine().Trim();
+                        Meal meal = menu.GetMeal(mealName);
+                        if (meal != null) {
+                            Console.Write("Enter order ID: ");
+                            int mealOrderId = Convert.ToInt32(Console.ReadLine().Trim());
+                            Order gotOrder = GetOrder(mealOrderId);
+                            if (gotOrder != null) {
+                                waitStaff.addMealToOrder(gotOrder, meal);
+                            }
+                        }
+                        break;
+                    case 'O':
+                        Console.Write("Enter order ID: ");
+                        int orderId = Convert.ToInt32(Console.ReadLine().Trim());
+                        Order order = GetOrder(orderId);
+                        if (order != null) {
+                            Console.WriteLine(GetOrder(orderId));
+                            Console.ReadLine();
+                        }
+                        break;
+                    case 'G':
+                        menu.PrintMenu();
+                        Console.Write("Enter meal name: ");
+                        String giveMealName = Console.ReadLine().Trim();
+                        Meal giveMealMeal = menu.GetMeal(giveMealName);
+                        if (giveMealMeal != null) {
+                            String giveCustomerEmail;
+                            Customer giveCustomer;
+                            do {
+                                Console.Write("Enter customer email: ");
+                                giveCustomerEmail = Console.ReadLine().Trim();
+                                giveCustomer = getCustomer(giveCustomerEmail);
+                            } while (giveCustomer == null);
+                            waitStaff.giveMeal(giveCustomer, giveMealMeal);
+                        }
+                        break;
+                    case 'M':
+                        Console.Write("Enter order ID: ");
+                        int markOrderId = Convert.ToInt32(Console.ReadLine().Trim());
+                        Order markOrder = GetOrder(markOrderId);
+                        if (markOrder != null) {
+                            waitStaff.markOrderComplete(markOrder);
+                        }
+                        break;
+                }
+            } while (selection != 'X');
+        }
+
         public Reservation Reservation
         {
             get => reservation;
         }
 
-        public Order GetOrder(int orderNumber)
+        public static Order GetOrder(int orderNumber)
         {
             // Get order with ID (int)
             return orders.Find(order => order.OrderNumber == orderNumber);
