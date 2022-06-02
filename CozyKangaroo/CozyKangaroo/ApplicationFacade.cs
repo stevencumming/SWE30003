@@ -9,6 +9,8 @@ namespace CozyKangaroo
         // Set to 2 since we have some orders pre-defined
         private static int orderNumber = 2;
 
+        private static int reportId = 1;
+
         private static ApplicationFacade singleton = null;
 
         private static List<Customer> customers = new List<Customer>
@@ -47,7 +49,11 @@ namespace CozyKangaroo
             new Invoice(orders[0]),
             new Invoice(orders[1])
         };
-        
+
+        private List<Report> reports = new List<Report>
+        {
+        };
+
         // Disabled default constructor
         private ApplicationFacade() {}
         
@@ -74,6 +80,7 @@ namespace CozyKangaroo
                     waitStaffMenu((WaitStaff) person);
                     break;
                 case Manager:
+                    managerMenu((Manager) person);
                     break;
             }
         }
@@ -276,9 +283,40 @@ namespace CozyKangaroo
             } while (selection != 'X');
         }
 
+        private static void managerMenu(Manager manager)
+        {
+            Char selection;
+            do {
+                Console.Clear();
+                Console.Write(
+                    "Manager Menu\n" +
+                    "  G    Generate Complete Report\n" +
+                    "  V    View Report\n" +
+                    "  X    Exit\n"
+                    "Select option: "
+                );
+                selection = Console.ReadLine().Trim()[0];
+                switch (selection) {
+                    case 'G':
+                        reports.Add(manager.generateReport(reportId++));
+                        break;
+                    case 'V':
+                        Char reportId = Console.ReadLine().Trim()[0];
+                        getReport(reportId).reportAllOrders();
+                        Console.ReadLine();
+                        break;
+                }
+            } while (selection != 'X');
+        }
+
         public Reservation Reservation
         {
             get => reservation;
+        }
+
+        public List<Invoice> Invoices
+        {
+            get => invoices;
         }
 
         public static Order GetOrder(int orderNumber)
@@ -304,6 +342,16 @@ namespace CozyKangaroo
                     return person;
                 } else if (person is WaitStaff && ((WaitStaff) person).login(username, password)) {
                     return person;
+                }
+            }
+            return null;
+        }
+
+        private static Report getReport(int reportId)
+        {
+            foreach (Report report in reports) {
+                if (report.reportID == reportID) {
+                    return report;
                 }
             }
             return null;
