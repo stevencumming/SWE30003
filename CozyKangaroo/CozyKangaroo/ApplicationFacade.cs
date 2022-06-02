@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace CozyKangaroo
 {
@@ -46,7 +45,7 @@ namespace CozyKangaroo
             new Order(1, new List<Meal> { menu.GetMeal("name3"), menu.GetMeal("name1") }, OrderType.DineIn, customers[0])
         };
 
-        private List<Invoice> invoices = new List<Invoice>
+        private static List<Invoice> invoices = new List<Invoice>
         {
             new Invoice(orders[0]),
             new Invoice(orders[1])
@@ -183,6 +182,8 @@ namespace CozyKangaroo
                     "  N    New Online Order\n" +
                     "  M    View Menu\n" +
                     "  O    View Orders\n" +
+                    "  R    Reserve Table\n" +
+                    "  P    Pay for Order\n" +
                     "  X    Exit\n" +
                     "Select option: "
                 );
@@ -197,6 +198,17 @@ namespace CozyKangaroo
                         break;
                     case 'O':
                         printOrders(customer);
+                        Console.ReadLine();
+                        break;
+                    case 'R':
+                        customer.reserveTable();
+                        break;
+                    case 'P':
+                        printOrders(customer);
+                        Console.Write("Enter order ID: ");
+                        int orderId = Convert.ToInt32(Console.ReadLine().Trim());
+                        Order order = GetOrder(orderId);
+                        invoices.Add(customer.payForOrder(order));
                         break;
                 }
             } while (selection != 'X');
@@ -360,7 +372,6 @@ namespace CozyKangaroo
                     Console.WriteLine(order.ToString());
                 }
             }
-            Console.ReadLine();
         }
     }
 }
