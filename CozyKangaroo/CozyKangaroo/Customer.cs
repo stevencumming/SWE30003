@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace CozyKangaroo 
 {
@@ -40,8 +41,24 @@ namespace CozyKangaroo
                 }
             } while (mealStr != "DONE");
 
-            // Add dine-in conditional code block
-
+            if (orderType == OrderType.DineIn) {
+                Console.Write("Do you have a reservation (y/N): ");
+                char hasReservation = Console.ReadLine().Trim().ToUpper()[0];
+                Table table;
+                if (hasReservation == 'Y') {
+                    String format = "MM/dd/yyyy hh:mm";
+                    Console.Write($"Reservation date time (format {format}): ");
+                    String dateTimeStr = Console.ReadLine().Trim();
+                    DateTime dateTime = DateTime.ParseExact(dateTimeStr, format, new CultureInfo("en-AU"));
+                    Console.Write("Table number: ");
+                    int tableNumber = Convert.ToInt32(Console.ReadLine().Trim());
+                    ApplicationFacade af = ApplicationFacade.Singleton;
+                    table = af.Reservation.FindReservation(dateTime, tableNumber);
+                } else {
+                    table = reserveTable();
+                }
+                return new Order(orderNumber, mealList, orderType, this, table);
+            }
             return new Order(orderNumber, mealList, orderType, this);
         }
 
@@ -65,11 +82,17 @@ namespace CozyKangaroo
             return menu.GetMeal(mealStr);
         }
 
-        public bool reserveTable(DateTime dateTime, int tableNumber)
+        public Table reserveTable()
         {
+            String format = "MM/dd/yyyy hh:mm";
+            Console.Write($"Reservation date time (format {format}): ");
+            String dateTimeStr = Console.ReadLine().Trim();
+            DateTime dateTime = DateTime.ParseExact(dateTimeStr, format, new CultureInfo("en-AU"));
+            Console.Write("Table number: ");
+            int tableNumber = Convert.ToInt32(Console.ReadLine().Trim());
             ApplicationFacade af = ApplicationFacade.Singleton;
             Table table = af.Reservation.CreateReservation(this, tableNumber, dateTime);
-            return table != null ? true : false;
+            return table;
         }
 
         public Invoice payForOrder(Order order)
