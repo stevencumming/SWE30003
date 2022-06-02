@@ -6,7 +6,7 @@ namespace CozyKangaroo
     sealed class ApplicationFacade
     {
         // Set to 2 since we have some orders pre-defined
-        private static int orderNumber = 2;
+        private static int orderNumber = 3;
 
         private static int reportId = 1;
 
@@ -41,8 +41,8 @@ namespace CozyKangaroo
 
         static private List<Order> orders = new List<Order>
         {
-            new Order(0, new List<Meal> { menu.GetMeal("name1"), menu.GetMeal("name2") }, OrderType.Takeaway, customers[0]),
-            new Order(1, new List<Meal> { menu.GetMeal("name3"), menu.GetMeal("name1") }, OrderType.DineIn, customers[0])
+            new Order(1, new List<Meal> { menu.GetMeal("name1"), menu.GetMeal("name2") }, OrderType.Takeaway, customers[0]),
+            new Order(2, new List<Meal> { menu.GetMeal("name3"), menu.GetMeal("name1") }, OrderType.DineIn, customers[0])
         };
 
         private static List<Invoice> invoices = new List<Invoice>
@@ -78,22 +78,30 @@ namespace CozyKangaroo
             } else if (person.GetType() == typeof(Manager)) {
                 managerMenu((Manager) person);
             }
+            Console.WriteLine("Bye ~ Cozy Kangaroo!");
         }
 
         static Person Login()
         {
             Person person = null;
-            char loginType;
+            string loginTypeStr;
+            char loginTypeChar = ' ';
             do {
+                if (loginTypeChar != ' ') {
+                    Console.WriteLine("\nPlease enter a valid login type\n");
+                }
                 Console.Write(
                     "Login Type\n" +
                     "  C    Customer Login\n" +
                     "  S    Staff Login\n" +
                     "Select login type: "
                 );
-                loginType = Console.ReadLine().Trim()[0];
-            } while (loginType != 'C' && loginType != 'S');
-            switch (loginType) {
+                loginTypeStr = Console.ReadLine().Trim().ToUpper();
+                if (loginTypeStr != "") {
+                    loginTypeChar = loginTypeStr[0];
+                }
+            } while (loginTypeChar != 'C' && loginTypeChar != 'S');
+            switch (loginTypeChar) {
                 case 'C':
                     person = customerScreen();
                     break;
@@ -107,18 +115,25 @@ namespace CozyKangaroo
         private static Customer customerScreen()
         {
             Customer customer = null;
-            char loginOpt;
+            string loginOptStr;
+            char loginOptChar = ' ';
             do {
+                if (loginOptChar != ' ') {
+                    Console.WriteLine("\nPlease enter a valid login type\n");
+                }
                 Console.Write(
                     "Cozy Kangaroo\n" +
                     "  L    Login\n" +
                     "  C    Create Account\n" +
                     "Select login type: "
                 );
-                loginOpt = Console.ReadLine().Trim()[0];
-            } while (loginOpt != 'L' && loginOpt != 'C');
+                loginOptStr = Console.ReadLine().Trim().ToUpper();
+                if (loginOptStr != "") {
+                    loginOptChar = loginOptStr[0];
+                }
+            } while (loginOptChar != 'L' && loginOptChar != 'C');
 
-            switch (loginOpt) {
+            switch (loginOptChar) {
                 case 'L':
                     customer = loginCustomer();
                     break;
@@ -131,54 +146,80 @@ namespace CozyKangaroo
 
         private static Customer loginCustomer()
         {
+            bool failed = false;
             Customer customer;
-            String name;
-            String email;
+            string name;
+            string email;
             do {
+                if (failed) {
+                    Console.WriteLine("\nPlease enter a valid name and password!\n");
+                }
                 Console.Write("Enter name: ");
                 name = Console.ReadLine().Trim();
                 Console.Write("Enter email: ");
                 email = Console.ReadLine().Trim();
                 customer = getCustomer(email);
+                if (customer == null) {
+                    failed = true;
+                }
             } while (customer == null);
             return customer;
         }
 
         private static Person loginStaff()
         {
+            bool failed = false;
             Person staff;
             String username;
             String password;
             do {
+                if (failed) {
+                    Console.WriteLine("\nPlease enter a valid username and password!\n");
+                }
                 Console.Write("Enter username: ");
                 username = Console.ReadLine().Trim();
                 Console.Write("Enter password: ");
                 password = Console.ReadLine().Trim();
                 staff = getStaff(username, password);
+                if (staff == null) {
+                    failed = true;
+                }
             } while (staff == null);
             return staff;
         }
 
         private static Customer createCustomer()
         {
-            String name;
-            String email;
+            bool failed = false;
+            string name;
+            string email;
             do {
+                if (failed) {
+                    Console.WriteLine("\nPlease enter a valid name and email!\n");
+                    failed = false;
+                }
                 Console.Write("Enter name: ");
                 name = Console.ReadLine().Trim();
                 Console.Write("Enter email: ");
                 email = Console.ReadLine().Trim();
-            } while (getCustomer(email) != null);
+                if (name == "" || email == "" || getCustomer(email) != null) {
+                    failed = true;
+                }
+            } while (failed);
             return new Customer(name, email);
         }
 
         private static void customerMenu(Customer customer)
         {
-            Char selection;
+            string selectionStr;
+            char selectionChar = ' ';
             do {
                 Console.Clear();
+                if (selectionChar != ' ') {
+                    Console.WriteLine("\nPlease enter a valid selection!\n");
+                }
                 Console.Write(
-                    "Cusomer Menu\n" +
+                    "Customer Menu\n" +
                     "  N    New Online Order\n" +
                     "  M    View Menu\n" +
                     "  O    View Orders\n" +
@@ -187,38 +228,57 @@ namespace CozyKangaroo
                     "  X    Exit\n" +
                     "Select option: "
                 );
-                selection = Console.ReadLine().Trim()[0];
-                switch (selection) {
+                selectionStr = Console.ReadLine().Trim().ToUpper();
+                if (selectionStr != "") {
+                    selectionChar = selectionStr[0];
+                }
+                switch (selectionChar) {
                     case 'N':
                         orders.Add(customer.onlineOrdering(menu, orderNumber++));
                         break;
                     case 'M':
                         menu.PrintMenu();
+                        Console.WriteLine("\nPress enter to continue!\n");
                         Console.ReadLine();
                         break;
                     case 'O':
                         printOrders(customer);
+                        Console.WriteLine("\nPress enter to continue!\n");
                         Console.ReadLine();
                         break;
                     case 'R':
-                        customer.reserveTable();
+                        Console.WriteLine(customer.reserveTable());
+                        Console.WriteLine("\nPress enter to continue!\n");
+                        Console.ReadLine();
                         break;
                     case 'P':
                         printOrders(customer);
-                        Console.Write("Enter order ID: ");
-                        int orderId = Convert.ToInt32(Console.ReadLine().Trim());
-                        Order order = GetOrder(orderId);
+                        int orderId = -1;
+                        Order order;
+                        do {
+                            Console.Write("Enter order ID: ");
+                            try {
+                                orderId = Convert.ToInt32(Console.ReadLine().Trim());
+                            } catch {
+                                Console.WriteLine("\nPlease enter a valid orderId!\n");
+                            }
+                            order = GetOrder(orderId);
+                        } while (order == null);
                         invoices.Add(customer.payForOrder(order));
                         break;
                 }
-            } while (selection != 'X');
+            } while (selectionChar != 'X');
         }
 
         private static void waitStaffMenu(WaitStaff waitStaff)
         {
-            Char selection;
+            string selectionStr;
+            char selectionChar = ' ';
             do {
                 Console.Clear();
+                if (selectionChar != ' ') {
+                    Console.WriteLine("\nPlease enter a valid selection!\n");
+                }
                 Console.Write(
                     "Wait Staff Menu\n" +
                     "  N    New Customer Order\n" +
@@ -228,12 +288,18 @@ namespace CozyKangaroo
                     "  M    Mark Order Complete\n" +
                     "  X    Exit\n" +
                     "Select option: ");
-                selection = Console.ReadLine().Trim()[0];
-                switch (selection) {
+                selectionStr = Console.ReadLine().Trim().ToUpper();
+                if (selectionStr != "") {
+                    selectionChar = selectionStr[0];
+                }
+                switch (selectionChar) {
                     case 'N':
-                        String customerEmail;
+                        String customerEmail = "";
                         Customer customer;
                         do {
+                            if (customerEmail != "") {
+                                Console.WriteLine("\nPlease enter a valid customer email!\n");
+                            }
                             Console.Write("Enter customer email: ");
                             customerEmail = Console.ReadLine().Trim();
                             customer = getCustomer(customerEmail);
@@ -247,55 +313,96 @@ namespace CozyKangaroo
                         Meal meal = menu.GetMeal(mealName);
                         if (meal != null) {
                             Console.Write("Enter order ID: ");
-                            int mealOrderId = Convert.ToInt32(Console.ReadLine().Trim());
-                            Order gotOrder = GetOrder(mealOrderId);
-                            if (gotOrder != null) {
-                                waitStaff.addMealToOrder(gotOrder, meal);
+                            int mealOrderId;
+                            try {
+                                mealOrderId = Convert.ToInt32(Console.ReadLine().Trim());
+                            } catch {
+                                Console.WriteLine("\nPlease enter a valid report Id! Press enter to continue!\n");
+                                Console.ReadLine();
+                                continue;
                             }
+                            Order gotOrder = GetOrder(mealOrderId);
+                            if (gotOrder == null) {
+                                Console.WriteLine("\nPlease enter a valid order number! Press enter to continue!\n");
+                                Console.ReadLine();
+                            }
+                            waitStaff.addMealToOrder(gotOrder, meal);
+                        } else {
+                            Console.WriteLine("\nMeal not found! Press enter to continue!\n");
+                            Console.ReadLine();
                         }
                         break;
                     case 'O':
                         Console.Write("Enter order ID: ");
-                        int orderId = Convert.ToInt32(Console.ReadLine().Trim());
-                        Order order = GetOrder(orderId);
-                        if (order != null) {
-                            Console.WriteLine(GetOrder(orderId));
+                        int orderId;
+                        try {
+                            orderId = Convert.ToInt32(Console.ReadLine().Trim());
+                        } catch {
+                            Console.WriteLine("\nPlease enter a valid order number! Press enter to continue!\n");
                             Console.ReadLine();
+                            continue;
                         }
+                        Order order = GetOrder(orderId);
+                        if (order == null) {
+                            Console.WriteLine("\nPlease enter a valid order number! Press enter to continue!\n");
+                            Console.ReadLine();
+                            continue;
+                        }
+                        Console.WriteLine(GetOrder(orderId));
+                        Console.ReadLine();
                         break;
                     case 'G':
                         menu.PrintMenu();
                         Console.Write("Enter meal name: ");
                         String giveMealName = Console.ReadLine().Trim();
                         Meal giveMealMeal = menu.GetMeal(giveMealName);
-                        if (giveMealMeal != null) {
-                            String giveCustomerEmail;
-                            Customer giveCustomer;
-                            do {
-                                Console.Write("Enter customer email: ");
-                                giveCustomerEmail = Console.ReadLine().Trim();
-                                giveCustomer = getCustomer(giveCustomerEmail);
-                            } while (giveCustomer == null);
-                            waitStaff.giveMeal(giveCustomer, giveMealMeal);
+                        if (giveMealMeal == null) {
+                            Console.WriteLine("\nPlease enter a valid meal name! Press enter to continue!\n");
+                            Console.ReadLine();
                         }
+                        String giveCustomerEmail = "";
+                        Customer giveCustomer;
+                        do {
+                            if (giveCustomerEmail != "") {
+                                Console.WriteLine("\nPlease enter a valid customer email!\n");
+                            }
+                            Console.Write("Enter customer email: ");
+                            giveCustomerEmail = Console.ReadLine().Trim();
+                            giveCustomer = getCustomer(giveCustomerEmail);
+                        } while (giveCustomer == null);
+                        waitStaff.giveMeal(giveCustomer, giveMealMeal);
                         break;
                     case 'M':
                         Console.Write("Enter order ID: ");
-                        int markOrderId = Convert.ToInt32(Console.ReadLine().Trim());
-                        Order markOrder = GetOrder(markOrderId);
-                        if (markOrder != null) {
-                            waitStaff.markOrderComplete(markOrder);
+                        int markOrderId;
+                        try {
+                            markOrderId = Convert.ToInt32(Console.ReadLine().Trim());
+                        } catch {
+                            Console.WriteLine("\nPlease enter a valid order number! Press enter to continue!\n");
+                            Console.ReadLine();
+                            continue;
                         }
+                        Order markOrder = GetOrder(markOrderId);
+                        if (markOrder == null) {
+                            Console.WriteLine("\nOrder not found! Press enter to continue!\n");
+                            Console.ReadLine();
+                            continue;
+                        }
+                        waitStaff.markOrderComplete(markOrder);
                         break;
                 }
-            } while (selection != 'X');
+            } while (selectionChar != 'X');
         }
 
         private static void managerMenu(Manager manager)
         {
-            Char selection;
+            string selectionStr;
+            char selectionChar = ' ';
             do {
                 Console.Clear();
+                if (selectionChar != ' ') {
+                    Console.WriteLine("\nPlease enter in a valid selection!\n");
+                }
                 Console.Write(
                     "Manager Menu\n" +
                     "  G    Generate Complete Report\n" +
@@ -303,18 +410,32 @@ namespace CozyKangaroo
                     "  X    Exit\n" +
                     "Select option: "
                 );
-                selection = Console.ReadLine().Trim()[0];
-                switch (selection) {
+                selectionStr = Console.ReadLine().Trim().ToUpper();
+                if (selectionStr != "") {
+                    selectionChar = selectionStr[0];
+                }
+                switch (selectionChar) {
                     case 'G':
                         reports.Add(manager.generateReport(reportId++));
                         break;
                     case 'V':
-                        Char viewReportId = Console.ReadLine().Trim()[0];
-                        getReport(viewReportId).reportAllOrders();
+                        int viewReportId;
+                        Report report = null;
+                        do {
+                            Console.Write("Please enter report Id: ");
+                            try {
+                                viewReportId = Convert.ToInt32(Console.ReadLine().Trim());
+                            } catch {
+                                Console.WriteLine("\nPlease enter a valid table number!\n");
+                                continue;
+                            }
+                            report = getReport(viewReportId);
+                        } while (report == null);
+                        report.reportAllOrders();
                         Console.ReadLine();
                         break;
                 }
-            } while (selection != 'X');
+            } while (selectionChar != 'X');
         }
 
         public Reservation Reservation
