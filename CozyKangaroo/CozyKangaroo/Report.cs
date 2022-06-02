@@ -10,7 +10,7 @@ namespace CozyKangaroo
         List<Invoice> allOrders;
         List<string> timeAndDates;
         // Constructor
-        public Report(List<Invoice> orders,int id)
+        public Report(List<Invoice> orders, int id)
         {
             reportID = id;
             allOrders = orders;
