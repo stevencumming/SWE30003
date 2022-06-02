@@ -20,12 +20,25 @@ namespace CozyKangaroo
             return this.username == username && this.password == password;
         }
 
-        public bool generateReport() {
-            return true;
-        }
+        public Report generateReport(int reportId) {
+            Char reportType;
+            do {
+                Console.Write(
+                    "Generate Report Type\n" +
+                    "  A    All Invoice Report\n" +
+                    "  X    Exit\n"
+                    "Select report type to generate: "
+                );
+                reportType = Console.ReadLine().Trim()[0];
+            } while (reportType != 'A' && reportType != 'X');
 
-        public string viewReport(int reportId) {
-            return "report text";
+            Report report = null;
+            switch (reportType) {
+                case 'A':
+                    report = new Report(ApplicationFacade.Singleton.Invoices, reportId);
+                    break;
+            }
+            return report;
         }
     }
 }
