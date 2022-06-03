@@ -62,7 +62,7 @@ namespace CozyKangaroo
                     }
                     Console.Write("Do you have a reservation (y/N): ");
                     hasReservationStr = Console.ReadLine().Trim().ToUpper();
-                    if (hasReservationStr == "") {
+                    if (hasReservationStr != "") {
                         hasReservationChar = hasReservationStr[0];
                     }
                 } while (hasReservationChar != 'Y' && hasReservationChar != 'N');
