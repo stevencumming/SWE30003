@@ -24,7 +24,6 @@ namespace CozyKangaroo
             this.numberOfSeats = numberOfSeats;
             this.tableStatus = TableStatus.Vacant;
             this.customerInfo = null;
-
         }
 
         public int TableNumber
@@ -84,9 +83,9 @@ namespace CozyKangaroo
         public override string ToString()
         {
             return "\nTable Reservation\n" +
-                $"Number of Seats: {this.NumberOfSeats}\n" +
-                $"Reservation Time: {this.ReservationTime}\n" +
-                $"Table Number: {this.TableNumber}\n";
+                $"Number of Seats: {this.numberOfSeats}\n" +
+                $"Reservation Time: {this.reservationTime}\n" +
+                $"Table Number: {this.tableNumber}\n";
         }
     }
 }
