@@ -39,11 +39,11 @@ namespace CozyKangaroo
         private string itemsInOrder()
         {
             string allItems = "";
-            for (int i = 0; i > allOrders.Count; i++)
+            foreach (Invoice invoice in allOrders)
             {
-                for (int x = 0; i > allOrders[i].Meals.Count; x++)
+                foreach (Meal meal in invoice.Meals)
                 {
-                    allItems = allItems + allOrders[i].Meals[x].Name + ", ";
+                    allItems += meal.Name + ", ";
                 }
             }
 
@@ -53,14 +53,13 @@ namespace CozyKangaroo
         private Double totalEarnings()
         {
             Double totalmoney = 0;
-            for(int i = 0; i > allOrders.Count; i++)
+            foreach (Invoice invoice in allOrders)
             {
-                for (int x = 0; i > allOrders[i].Meals.Count; x++)
+                foreach (Meal meal in invoice.Meals)
                 {
-                    totalmoney = totalmoney + allOrders[i].Meals[x].Price;
+                    totalmoney += meal.Price;
                 }
             }
-
             return totalmoney;
         }
         private void TimeAndDates()

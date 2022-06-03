@@ -456,7 +456,7 @@ namespace CozyKangaroo
                         // print current reports available
                         foreach (Report print_report in reports)
                         {
-                            Console.WriteLine(print_report.ReportID + "  - Report Generated: " + "");    // TODO 
+                            Console.WriteLine(print_report.ReportID + "  - Report Generated: " + "");
                         }
 
                         int viewReportId;
