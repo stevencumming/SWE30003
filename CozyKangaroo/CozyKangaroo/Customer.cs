@@ -20,6 +20,7 @@ namespace CozyKangaroo
             string orderTypeStr;
             char orderTypeChar = ' ';
             do {
+                Console.Clear();
                 if (orderTypeChar != ' ') {
                     Console.WriteLine("\nPlease enter a correct order type!\n");
                 }
@@ -39,15 +40,20 @@ namespace CozyKangaroo
             string mealStr = "";
             List<Meal> mealList = new List<Meal>();
             do {
+                Console.Clear();
                 Meal orderMeal = selectMenuItem(menu, ref mealStr);
                 if (orderMeal != null) {
                     mealList.Add(orderMeal);
+                    Console.Write("\nMeal added to order. Press enter to continue.");
+                    Console.ReadLine();
                 }
                 else if (mealStr.ToUpper() != "DONE") {
-                    Console.WriteLine("\nNo meal found!\n");
+                    Console.WriteLine("\nNo meal found!\nPlease try again.\n\nPress Enter to continue.");
+                    Console.ReadLine();
                 }
             } while (mealStr.ToUpper() != "DONE");
 
+            Console.Clear();
             if (orderType == OrderType.DineIn) {
                 string hasReservationStr;
                 char hasReservationChar = ' ';
@@ -105,8 +111,9 @@ namespace CozyKangaroo
 
         public Meal selectMenuItem(Menu menu, ref String mealStr)
         {
+            Console.WriteLine(" ~ Cozy Kangaroo ~ Menu - All Items:");
             menu.PrintMenu();
-            Console.Write("Enter meal name (Type 'DONE' when done): ");
+            Console.Write("\n\nEnter meal name to add to order\n(Type 'DONE' when done): ");
             mealStr = Console.ReadLine().Trim();
             return menu.GetMeal(mealStr);
         }
