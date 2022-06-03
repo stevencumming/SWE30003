@@ -33,6 +33,7 @@ namespace CozyKangaroo
                 int tableIndex = GetTableIndex(tableNumber);
                 tables[tableIndex].TableStatus = TableStatus.Reserved;
                 tables[tableIndex].CustomerInfo = customer;
+                tables[tableIndex].ReservationTime = reservationTime;
                 Console.WriteLine("Table has reserved successfully");
                 return tables[tableIndex];
             }
