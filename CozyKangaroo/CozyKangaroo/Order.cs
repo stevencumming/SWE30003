@@ -123,8 +123,8 @@ namespace CozyKangaroo
             {
                 // IIN List from https://www.creditcardvalidator.org/country/au-australia
                 Regex rCardNum = new Regex(@"^(37\d{13}|40[157]\d{13}|41[34]\d{13}|423953\d{10}|436356\d{10}|43638410\d{8}|443\d{13}|4[56789]\d{14}|5[1245]\d{15})");
-                Regex rCardCVV = new Regex(@"^\d{3}");
-                Regex rCardExp = new Regex(@"[0-9]{2}\/[23][0-9]");
+                Regex rCardCVV = new Regex(@"^(\d{3})");
+                Regex rCardExp = new Regex(@"^([0-9]{2}\/[23][0-9])");
 
                 return (rCardNum.IsMatch(cardNumber) && rCardCVV.IsMatch(cardCVV) && rCardExp.IsMatch(cardExpiry));
             }
