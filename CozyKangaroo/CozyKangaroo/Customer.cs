@@ -141,10 +141,7 @@ namespace CozyKangaroo
                 if (!dateConverted) {
                     Console.WriteLine("\nPlease enter in a valid date time!\n");
                 }
-                table = af.Reservation.FindReservation(dateTime, tableNumber);
-                Console.WriteLine(dateConverted);
-                Console.WriteLine(dateTimeStr);
-                Console.WriteLine(dateTime);
+                table = af.Reservation.CreateReservation(this, tableNumber, dateTime);
             } while (!dateConverted || table == null);
             return table;
         }
