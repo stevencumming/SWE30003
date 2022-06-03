@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace CozyKangaroo
-    {
+{
     class Reservation
     {
         private List<Table> tables;
@@ -16,8 +16,6 @@ namespace CozyKangaroo
                 return tables;
             }
         }
-
-
 
         public Reservation(List<Table> tables )
         {
@@ -91,7 +89,6 @@ namespace CozyKangaroo
                     return i;
                 }
             }
-
             // table not found
             return -1;
         }
@@ -129,4 +126,4 @@ namespace CozyKangaroo
             return null;
         }
     }
-    }
+}

@@ -244,7 +244,6 @@ namespace CozyKangaroo
 
             // order is marked as paid.
             // create invoice and return it
-
             return new Invoice(this);
         }
 

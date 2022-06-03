@@ -7,7 +7,6 @@ namespace CozyKangaroo
     {
         // Set to 2 since we have some orders pre-defined
         private static int orderNumber = 3;
-
         private static int reportId = 1;
 
         private static ApplicationFacade singleton = null;

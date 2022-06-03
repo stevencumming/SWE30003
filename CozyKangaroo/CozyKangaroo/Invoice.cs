@@ -39,7 +39,6 @@ namespace CozyKangaroo
 
         }
 
-   
         public void generateInvoice()
         {
             // produces tax invoice if the order has been paid for
