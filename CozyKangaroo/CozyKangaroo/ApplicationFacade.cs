@@ -34,15 +34,17 @@ namespace CozyKangaroo
 
         static private Menu menu = new Menu("Cozy Kangaroo - All Items", new List<Meal>
         {
-            new Meal("name1", "description1", 1.23, false, new List<String> {"ingredient1", "ingredient2", "ingredient3"}, new List<String> {"allergen1", "allergen2"}, true, "https://imagelocation.com/image.png"),
-            new Meal("name2", "description2", 4.56, true, new List<String> {"ingredient1", "ingredient2", "ingredient3"}, new List<String> {"allergen1", "allergen2"}, true, "https://imagelocation.com/image.png"),
-            new Meal("name3", "description3", 7.89, true, new List<String> {"ingredient1", "ingredient2", "ingredient3"}, new List<String> {"allergen1", "allergen2"}, true, "https://imagelocation.com/image.png"),
+            new Meal("porterhouse", "Porterhouse Steak 300g w/ sauce & chips", 38.90, false, new List<String> {"beef", "potato", "salt", "vegetable oil"}, new List<String> {"soy beans"}, true, "https://imagelocation.com/image.png"),
+            new Meal("spaghetti", "Spaghetti Bolognese", 22.90, true, new List<String> {"lean beef mince", "lean pork mince", "tomato sauce"}, new List<String> {"tomato"}, true, "https://imagelocation.com/image.png"),
+            new Meal("pasta", "Penne Napoletana w/ Homemade Tomato Sauce", 21.90, true, new List<String> {"pasta", "tomato sauce"}, new List<String> {"tomato"}, true, "https://imagelocation.com/image.png"),
+            new Meal("salad", "Italian Salad ", 21.90, true, new List<String> {"lettuce", "tomato", "cucumber", "olives", "balsamic dressing"}, new List<String> {"tomato"}, true, "https://imagelocation.com/image.png"),
+            new Meal("parmi", "Chicken Parmigiana", 21.90, true, new List<String> {"chicken", "mozarella", "tomato sauce"}, new List<String> {"tomato"}, true, "https://imagelocation.com/image.png")
         });
 
         static private List<Order> orders = new List<Order>
         {
-            new Order(1, new List<Meal> { menu.GetMeal("name1"), menu.GetMeal("name2") }, OrderType.Takeaway, customers[0]),
-            new Order(2, new List<Meal> { menu.GetMeal("name3"), menu.GetMeal("name1") }, OrderType.DineIn, customers[0])
+            new Order(1, new List<Meal> { menu.GetMeal("pasta"), menu.GetMeal("salad") }, OrderType.Takeaway, customers[0]),
+            new Order(2, new List<Meal> { menu.GetMeal("spaghetti"), menu.GetMeal("spaghetti"), menu.GetMeal("parmi") }, OrderType.DineIn, customers[0])
         };
 
         private static List<Invoice> invoices = new List<Invoice>
