@@ -177,17 +177,20 @@ namespace CozyKangaroo
                                 // Wait staff would take payment with EFTPOS machine
                                 Console.WriteLine("Total Due: " + OrderTotal());
 
+                                Console.Clear();
                                 // In real-life this would tie into some banking system.
                                 Console.Write("Processing..");
                                 for (int i = 0; i < 20; i++)
                                 {
                                     Console.Write(".");
-                                    Thread.Sleep(500);
+                                    Thread.Sleep(200);
                                 }
 
                                 // mark as paid
-                                Console.WriteLine("Payment Complete. Thank you.");
+                                Console.Clear();
                                 paid = true;
+                                Console.WriteLine("Payment Complete. Thank you.\nPlease press Enter to continue");
+                                Console.ReadLine();
                                 break;
                             default:
                                 Console.WriteLine("Please enter a valid selection.");
@@ -219,9 +222,20 @@ namespace CozyKangaroo
                             }
                         }
 
+                        Console.Clear();
+                        // In real-life this would tie into some banking system.
+                        Console.Write("Processing..");
+                        for (int i = 0; i < 20; i++)
+                        {
+                            Console.Write(".");
+                            Thread.Sleep(200);
+                        }
+
                         // mark as paid
+                        Console.Clear();
                         paid = true;
-                        Console.WriteLine("Payment Complete. Thank you.");
+                        Console.WriteLine("Payment Complete. Thank you.\nPlease press Enter to continue");
+                        Console.ReadLine();
                         break;
                     default:
                         break;

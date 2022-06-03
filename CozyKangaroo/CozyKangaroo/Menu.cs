@@ -24,7 +24,6 @@ namespace CozyKangaroo
 
         public void PrintMenu()
         {
-            Console.WriteLine("-- Menu --");
             for (int i = 0; i < meals.Count; i++)
             {
                 Console.WriteLine(String.Format("{0:000}", i) + "  -  " + meals[i].Name + "  -  " + meals[i].Description + "  -  " + meals[i].Price);

@@ -70,14 +70,29 @@ namespace CozyKangaroo
 
         static void Main(string[] args)
         {
-            Person person = Login();
-            if (person.GetType() == typeof(Customer)) {
-                customerMenu((Customer) person);
-            } else if (person.GetType() == typeof(WaitStaff)) {
-                waitStaffMenu((WaitStaff) person);
-            } else if (person.GetType() == typeof(Manager)) {
-                managerMenu((Manager) person);
-            }
+            Person person;
+            do
+            {
+                Console.Clear();
+                person = Login();
+                if (person == null) // if exit requested
+                {
+                    break;
+                }
+                Console.Clear();
+                if (person.GetType() == typeof(Customer))
+                {
+                    customerMenu((Customer)person);
+                }
+                else if (person.GetType() == typeof(WaitStaff))
+                {
+                    waitStaffMenu((WaitStaff)person);
+                }
+                else if (person.GetType() == typeof(Manager))
+                {
+                    managerMenu((Manager)person);
+                }
+            } while (person != null);
             Console.WriteLine("Bye ~ Cozy Kangaroo!");
         }
 
@@ -91,22 +106,27 @@ namespace CozyKangaroo
                     Console.WriteLine("\nPlease enter a valid login type\n");
                 }
                 Console.Write(
-                    "Login Type\n" +
+                    "~ Welcome to Cozy Kangaroo ~\n\n" +
+                    "Please select Login Type\n" +
                     "  C    Customer Login\n" +
                     "  S    Staff Login\n" +
+                    "  X    Exit\n\n" +
                     "Select login type: "
                 );
                 loginTypeStr = Console.ReadLine().Trim().ToUpper();
                 if (loginTypeStr != "") {
                     loginTypeChar = loginTypeStr[0];
                 }
-            } while (loginTypeChar != 'C' && loginTypeChar != 'S');
+            } while (loginTypeChar != 'C' && loginTypeChar != 'S' && loginTypeChar != 'X');
             switch (loginTypeChar) {
                 case 'C':
                     person = customerScreen();
                     break;
                 case 'S':
                     person = loginStaff();
+                    break;
+                case 'X':
+                    person = null;
                     break;
             }
             return person;
@@ -118,13 +138,14 @@ namespace CozyKangaroo
             string loginOptStr;
             char loginOptChar = ' ';
             do {
+                Console.Clear();
                 if (loginOptChar != ' ') {
                     Console.WriteLine("\nPlease enter a valid login type\n");
                 }
                 Console.Write(
-                    "Cozy Kangaroo\n" +
+                    "Cozy Kangaroo - Customer\n\n" +
                     "  L    Login\n" +
-                    "  C    Create Account\n" +
+                    "  C    Create Account\n\n" +
                     "Select login type: "
                 );
                 loginOptStr = Console.ReadLine().Trim().ToUpper();
@@ -215,9 +236,6 @@ namespace CozyKangaroo
             char selectionChar = ' ';
             do {
                 Console.Clear();
-                if (selectionChar != ' ') {
-                    Console.WriteLine("\nPlease enter a valid selection!\n");
-                }
                 Console.Write(
                     "Customer Menu\n" +
                     "  N    New Online Order\n" +
@@ -225,7 +243,7 @@ namespace CozyKangaroo
                     "  O    View Orders\n" +
                     "  R    Reserve Table\n" +
                     "  P    Pay for Order\n" +
-                    "  X    Exit\n" +
+                    "  X    Logout\n" +
                     "Select option: "
                 );
                 selectionStr = Console.ReadLine().Trim().ToUpper();
@@ -237,6 +255,8 @@ namespace CozyKangaroo
                         orders.Add(customer.onlineOrdering(menu, orderNumber++));
                         break;
                     case 'M':
+                        Console.Clear();
+                        Console.Write("~ Cozy Kangaroo ~\nMenu: (All Items)\n");
                         menu.PrintMenu();
                         Console.WriteLine("\nPress enter to continue!\n");
                         Console.ReadLine();
@@ -266,6 +286,12 @@ namespace CozyKangaroo
                         } while (order == null);
                         invoices.Add(customer.payForOrder(order));
                         break;
+                    case 'X':
+                        break;
+                    default:
+                        Console.WriteLine("\nInvalid Selection.\nPlease try again with a valid selection! Press Enter to continue.");
+                        Console.ReadLine();
+                        break;
                 }
             } while (selectionChar != 'X');
         }
@@ -286,7 +312,7 @@ namespace CozyKangaroo
                     "  O    Get Order\n" +
                     "  G    Give Meal to Customer\n" +
                     "  M    Mark Order Complete\n" +
-                    "  X    Exit\n" +
+                    "  X    Logout\n" +
                     "Select option: ");
                 selectionStr = Console.ReadLine().Trim().ToUpper();
                 if (selectionStr != "") {
@@ -400,14 +426,14 @@ namespace CozyKangaroo
             char selectionChar = ' ';
             do {
                 Console.Clear();
-                if (selectionChar != ' ') {
+                if (selectionChar != ' ' && selectionChar != 'V' && selectionChar != 'G') {
                     Console.WriteLine("\nPlease enter in a valid selection!\n");
                 }
                 Console.Write(
                     "Manager Menu\n" +
-                    "  G    Generate Complete Report\n" +
-                    "  V    View Report\n" +
-                    "  X    Exit\n" +
+                    "  G    Generate Complete Report\n");
+                if (reports.Count != 0) Console.Write("  V    View Report\n");      // Only show option if reports actually available.
+                Console.Write("  X    Logout\n" +
                     "Select option: "
                 );
                 selectionStr = Console.ReadLine().Trim().ToUpper();
@@ -416,22 +442,35 @@ namespace CozyKangaroo
                 }
                 switch (selectionChar) {
                     case 'G':
+                        Console.Clear();
                         reports.Add(manager.generateReport(reportId++));
+                        Console.Clear();
+                        Console.WriteLine("Report Generated Successfully.\nPlease press Enter to continue.");
+                        Console.ReadLine();
                         break;
                     case 'V':
+                        if (reports.Count == 0) break;                              // if no reports available break out
+
+                        // print current reports available
+                        foreach (Report print_report in reports)
+                        {
+                            Console.WriteLine(print_report.ReportID + "  - Report Generated: " + "");    // TODO 
+                        }
+
                         int viewReportId;
                         Report report = null;
                         do {
-                            Console.Write("Please enter report Id: ");
+                            Console.Write("\nPlease enter report Id: ");
                             try {
                                 viewReportId = Convert.ToInt32(Console.ReadLine().Trim());
                             } catch {
-                                Console.WriteLine("\nPlease enter a valid table number!\n");
+                                Console.WriteLine("\nPlease enter a valid report Id!\n");
                                 continue;
                             }
                             report = getReport(viewReportId);
                         } while (report == null);
                         report.reportAllOrders();
+                        Console.WriteLine("\nPlease press Enter to continue.");
                         Console.ReadLine();
                         break;
                 }

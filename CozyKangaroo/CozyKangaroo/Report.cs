@@ -19,6 +19,8 @@ namespace CozyKangaroo
         
         public void reportAllOrders()
         {
+            Console.Clear();
+            Console.WriteLine("------ Report ------\n");
             Console.WriteLine("All Orders");
             Console.WriteLine("Report ID:" + reportID);
             Console.WriteLine("Number of all time orders: "+ allOrders.Count);
@@ -26,8 +28,7 @@ namespace CozyKangaroo
             Console.WriteLine("list of ordered items: " );
             Console.WriteLine(itemsInOrder());
 
-
-
+            
         }
         // Getters and Setters
         public int ReportID

@@ -57,12 +57,12 @@ namespace CozyKangaroo
                     }
                     Console.Write("Do you have a reservation (y/N): ");
                     hasReservationStr = Console.ReadLine().Trim().ToUpper();
-                    if (hasReservationStr == "") {
+                    if (hasReservationStr != "") {
                         hasReservationChar = hasReservationStr[0];
                     }
                 } while (hasReservationChar != 'Y' && hasReservationChar != 'N');
 
-                Table table;
+                Table table;                                                            // TODO this stuff really needs some error feedback to the user
                 if (hasReservationChar == 'Y') {
                     string format = "dd-MM-yyyy HH:mm";
                     CultureInfo local = new CultureInfo("en-AU");
